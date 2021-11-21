@@ -1,0 +1,9 @@
+<include path='header_footer.ml'/><record id=content>
+<div class='w3-container w3-theme-l5'>
+
+<form>
+<input type="text" name="shipyard"/>
+<input type="submit" value='show me what i want to see'/>
+</form>
+
+</div></record><play id='header_footer'/>

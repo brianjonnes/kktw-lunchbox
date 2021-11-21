@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteRule ^([^.]*)$ /egg-sgml/5/templates.php?t=%{REQUEST_URI} [QSA,END]
+
+RewriteRule ^(.*)\.xgml$ $1 [R,END]
+
+RewriteRule ^egg-sgml/[0-9]+ / [R,END]
+# Prevent external access to egg-sgml path.
+
+RewriteBase /
