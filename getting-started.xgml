@@ -3,6 +3,15 @@
 </record--><record id="content">
 <div class="w3-container w3-theme-l5 local">
 
-<p>These instructions will only be for Cpanel, when I get started with them.</p>
+<p>These instructions will only be for Cpanel, as it seems
+to be the defacto standard and the tools it uses seem all to
+be GNU ones.
+For now, the information on how to make a copy of the
+following git repo,
+and why making your personal website code public is a good
+idea--besides being the easiest way of publishing--will
+be assumed to be obtainable somewhere or other.</p>
+
+<p><a href='https://github.com/brianjonnes/kktw-lunchbox'>https://github.com/brianjonnes/kktw-lunchbox</a></p>.
 
 </div></record><play id=header_footer/>
