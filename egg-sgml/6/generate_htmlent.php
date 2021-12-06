@@ -1,6 +1,5 @@
 <?php
-include '../1/version.php';
-#    templates.php - Egg SGML request handler
+#    generate_html_ent.php - Egg-SGML
 #    Copyright 2020, 2021 Brian Jonnes
 
 #    Egg-SGML is free software: you can redistribute it and/or modify
@@ -15,10 +14,21 @@ include '../1/version.php';
 #    You should have received a copy of the GNU General Public License
 #    along with Egg-SGML.  If not, see <https://www.gnu.org/licenses/>.
 
-include 'parser.php';
-include 'eggsgml-loader.php';
-include 'eggsgml.php';
-include 'tgc_generic.php';
-include 'meta-templates.php';
+function main() {
+	$x = $n = $g = 00; $j = 0;
+
+	$g = get_html_translation_table(HTML_ENTITIES);
+	echo '$this->htmlent = [ ';
+	foreach( $g as $x => $n ) {
+		if( $n[0] == '&' && $n[strlen($n)-1] == ';' ) {
+			if( $j ) echo ', '; $j = 1;
+			echo '\'' . substr($n,1,strlen($n)-2) . '\' => ' . mb_ord($x);
+		}
+		
+	}
+	echo ' ];';
+}
+		
+main()
 
 ?>

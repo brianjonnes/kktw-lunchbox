@@ -119,6 +119,8 @@ file must remain).</td></tr>
 </table>
 
 <table>
+<tr><td>6/2</td><td>Entry code</td></tr>
+<tr><td></td><td>Custom templates.php requires modules.php (enqueue_modules).</td></tr>
 <tr><td>6/1</td><td>Cleanup</td></tr>
 <tr><td></td><td>Remove no-doctype from templates_config.xml.</td></tr>
 </table>

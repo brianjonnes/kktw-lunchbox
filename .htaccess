@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteRule ^([^.]*)$ /egg-sgml/5/templates.php?t=%{REQUEST_URI} [QSA,END]
+RewriteRule ^([^.]*)$ /egg-sgml/6/templates.php?t=%{REQUEST_URI} [QSA,END]
 
 RewriteRule ^(.*)\.xgml$ $1 [R,END]
 

@@ -1,6 +1,5 @@
 <?php
-include '../1/version.php';
-#    templates.php - Egg SGML request handler
+#    eggsgml-loader.php - Use Egg SGML parser (contrast with php-loader using XML parser).
 #    Copyright 2020, 2021 Brian Jonnes
 
 #    Egg-SGML is free software: you can redistribute it and/or modify
@@ -15,10 +14,24 @@ include '../1/version.php';
 #    You should have received a copy of the GNU General Public License
 #    along with Egg-SGML.  If not, see <https://www.gnu.org/licenses/>.
 
-include 'parser.php';
-include 'eggsgml-loader.php';
-include 'eggsgml.php';
-include 'tgc_generic.php';
-include 'meta-templates.php';
+function load_eggsgml_file( $doc ) {
+	$k = $n = $u = $m = 00;
+	
+	$m = new W3CDOM_tagreceiver();
+	$u = new eggsgml_parser($m);
+	load_eggsgml_file_2( $m, $u, $doc );
+	return $m->w;
+}
+
+function load_eggsgml_file_env( $env, $doc ) {
+	$u = null;
+
+	$m = new W3CDOM_tagreceiver();
+	$u = new eggsgml_parser($m);
+	if( $env->interimjsupgrade ) {
+		$u->interimjsupgrade = true; }
+	load_eggsgml_file_2( $m, $u, $doc );
+	return $m->w;
+}
 
 ?>

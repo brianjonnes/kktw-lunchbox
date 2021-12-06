@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with Egg-SGML.  If not, see <https://www.gnu.org/licenses/>.
 
-class environ {
+class libconfig {
 	public $self_href, $shipyard;
 	public $sct; public $scriptnow;
 	public $file_ext; public $templatefile; public $urlpath;
@@ -62,8 +62,11 @@ class environ {
 	}
 };
 
-function main_f($env,$extension,$altextension,$extoptional,$doc,$self_href) {
-	$c = $d = $m = null; $b = 0;
+class docloader_egg {
+	public $d, $end, $doc;
+	function __construct($env,$extension,$altextension,$extoptional,$doc,$self_href) {
+	$c = $m = null; $b = 0;
+	$this->d = null; $this->env = $env; $this->doc = $doc;
 	$env->self_href = $self_href;
 	do {
 		if( $extension != '' ) {
@@ -85,31 +88,43 @@ F:				if( $env->fallback != '' ) {
 			goto F; }
 		$env->templatefile = $doc;
 	} while(0);
-	$d = load_eggsgml_file_env( $env, $env->templatefile );
-	$m = eggsgml_descendent( $d, 'cache_control' );
+	$this->d = load_eggsgml_file_env( $env, $env->templatefile );
+	}
+	function tap( $eggenv, $str ) {
+		$c = $m = null; $b = 0; $k = null;
+	if( ! $this->d ) return;
+	$m = eggsgml_descendent( $this->d, 'cache_control' );
 	if( $m ) if( attribute_exists($m,'static') ) {
 m:		$c = apache_request_headers();
 		if( array_key_exists('If-Modified-Since',$c) ) {
 			$b = strtotime($c['If-Modified-Since']);
-			if( filemtime($env->templatefile) <= $b ) {
+			if( filemtime($this->env->templatefile) <= $b ) {
 				http_response_code(304);
 				return; }
 		}
-		header('Last-Modified: ' . date('r',filemtime($env->templatefile)));
+		header('Last-Modified: ' . date('r',filemtime($this->env->templatefile)));
 		header('Cache-Control: max-age=0');
 	} else if( attribute_exists($m,'dynamic') ) {
-n:		header('Last-Modified: ' . date('r',$env->scriptnow));
+n:		header('Last-Modified: ' . date('r',$this->env->scriptnow));
 		header('Cache-Control: max-age=0');
 	} else if( attribute_exists($m,'querystring') ) {
 		if( array_key_exists( 'REDIRECT_QUERY_STRING', $_SERVER ) ) {
 			goto n; }
 		goto m;
 	}
-	$k = newframe(new tgc_generic(dirname($doc,1),$env), new echo_out, $d);
-	if( ! $env->nodoctype ) {
-		echo ("<!doctype html>"); }
-	return $k;
+	enqueue_modules( $eggenv, $this->doc, $this->env );
+	$k = new domegg;
+	$k->tgcnode = $eggenv->stack;
+	$k->writernode = ( $eggenv->stack->q ? $eggenv->stack : $eggenv->stack->writernode );
+	$k->dn = $this->d;
+	$eggenv->enqueue( $k, 0 );
+
+	//$k = newframe(new tgc_generic(dirname($doc,1),$env), new echo_out, $d);
+	//if( ! $env->nodoctype ) {
+	//	echo ("<!doctype html>"); }
+	//return $k;
 }
+};
 
 function attribute_exists( $w, $n ) {
 	$m = 00;
@@ -133,6 +148,11 @@ function check_shipyard_auth($env,$u) {
 
 class tgc_templates {
 	public $NF;
+	function self_protocol($w) {
+		if( attribute_exists( $w, "redirect-to-ssl" ) || array_key_exists('HTTPS',$_SERVER) ) {
+			return 'https'; }
+		return 'http';
+	}
 	function start( $q ) {
 		return 0; }
 	function repeat( $q ) {
@@ -144,10 +164,10 @@ class tgc_templates {
 		if( $w->nodeName == 'main' ) {
 			if( $end ) return 1;
 			$path = $_SERVER['DOCUMENT_ROOT'];
-			$env = new environ;
+			$env = new libconfig;
 			$env->secrets_path = $w->getAttribute('secrets-path');
 			$env->urlpath = $_GET['t'];
-			$env->nodoctype = attribute_exists( $w, 'no-doctype' );
+			$env->nodoctype = true;
 			$env->api = basename(dirname($_SERVER['PHP_SELF']));
 			$env->interimjsupgrade = true;
 			if( file_exists( $path . '/shipyard.txt' ) ) {
@@ -166,21 +186,21 @@ class tgc_templates {
 			}
 			$env->file_ext = $w->getAttribute('extension');
 			if( ! check_shipyard_auth($env,$path) ) {
-				$this->NF = main_f( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . attribute_with_inival( $w, 'shipyard-doc', '/shipyard'), '/shipyard');
-				if( ! $this->NF ) return 0;
-				return 3; }
+				$this->NF = new docloader_egg( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . attribute_with_inival( $w, 'shipyard-doc', '/shipyard'), '/shipyard');
+				//if( ! $this->NF ) return 1;
+				return 4; }
 			if( $_GET['t'] == '/' ) {
-				$this->NF = main_f( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . '/' . $w->getAttribute('rootdoc'), $_GET['t'] );
-				if( ! $this->NF ) return 0;
-				return 3;
+				$this->NF = new docloader_egg( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . '/' . $w->getAttribute('rootdoc'), $_GET['t'] );
+				//if( ! $this->NF ) return 1;
+				return 4;
 			}
 			if( $_GET['t'] == '/' . $w->getAttribute('rootdoc') ) {
-				header('Location:https://' . $_SERVER['HTTP_HOST'] . '/' );
+				header('Location:' . $this->self_protocol($w) . '://' . $_SERVER['HTTP_HOST'] . '/' );
 				return 1;
 			}
-			$this->NF = main_f( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . strtolower(str_replace('.','',$_GET['t'])), strtolower($_GET['t']) );
-			if( ! $this->NF ) return 0;
-			return 3;
+			$this->NF = new docloader_egg( $env, $w->getAttribute('extension'), $w->getAttribute('alt-extension'), attribute_exists($w,'extension-optional'), $path . strtolower(str_replace('.','',$_GET['t'])), strtolower($_GET['t']) );
+			//if( ! $this->NF ) return 1;
+			return 4;
 		}
 		return 0;
 	}
