@@ -1,0 +1,126 @@
+<cache_control static/><include path="header_footer.ml"/><record id=meta></record><record id=title>Egg-SGML</record><!--record id="nav-extra">
+	<a class="w3-bar-item w3-button  w3-theme-l5 active" href="/egg-sgml">Egg-SGML</a>
+</record--><record id="content">
+<div class="w3-container w3-theme-l5 local">
+
+<p>If you're here you don't know what's good for you.
+But I also spend far too little time on the beach.</p>
+
+<p>The shore gives us an example of something that's ever-changing
+yet always the same (to the user). But the lack of version control
+is appalling.
+In fact, it's offensive.
+
+A version vector, though both an internationally recognized
+standard and a well-established trend, sends this user in all
+directions.
+Keeping things to one dimension, and noting that one update
+is not comparable to another, real numbers look at us and ask
+why they're being kept out the picture.
+
+I like to think simplicity speaks for itself,
+but keeping things to simplicity itself we're at risk
+of hearing about the moon and the stars.</p>
+
+<p>The api is necessary information to note, and in the
+version string it is shown as the denominator (because I've
+just said I'm keeping the number to one dimension).</p>
+
+<p>There is no reason to get rid of apis, but it must be
+understood that necessity is the mother of testing--things 
+cannot be safely amended without a use case.
+Moving to the latest api should generally be safe to
+do, as well as advisable, but it is one thing that must
+not be rushed.</p>
+
+<p>This page is the authoritative url for the update
+notes for Egg-SGML.</p>
+
+<p>The built-in set of tags, as described in the following
+table, are appropriate for static websites.</p>
+
+<table>
+<tr><td>&lt;cache_control/></td><td>static dynamic</td><td>Applies
+rules for If-Modified-Since handling (cannot be in an include file).</td></tr>
+<tr><td>&lt;play/></td><td>id</td><td>Replaced with the (structured) contents of a
+clip.</td></tr>
+<tr><td>&lt;record></td><td>id</td><td>Places the contents (sub-tree)
+into a clip, overwriting if necessary.</td></tr>
+<tr><td>&lt;include/></td><td>path</td><td>Replaced with the contents of the web relative path.</td></tr>
+<tr><td></td><td colspan=2>Note that the mapping does not utilize the
+web server's url mapping.</td></tr>
+<tr><td>&lt;form.cache_dynamic></td><td></td><td>Substitute tag: produces
+a &lt;form> with the same attributes, but provides a query parameter
+which allows caching of blank forms.</td></tr>
+<tr><td>&lt;shipyard></td><td></td><td>Dry-docks.</td></tr>
+<tr><td>&lt;sailing></td><td></td><td>Complementary to &lt;shipyard>.</td></tr>
+<tr><td>&lt;a.site></td><td>href activeclass</td><td>Substitute tag: produces
+&lt;a> with the same attributes, but using activeclass instead
+of class if href points to the enclosing webdoc.</td></tr>
+<tr><td>&lt;redirect/></td><td>location</td><td>PHP rules: this aught to
+be the very first tag.</td></tr>
+</table>
+
+<p>On the matter of self-closing tags, it must be understood
+that whether a tag is self-closing or enclosing, matters
+to the processing of them, not the parser: 
+for all tags are
+closed automatically when their parent tag is closed.
+But if you don't self-close &lt;include> what comes after
+it is now a sub-tree and therefore ignored;</include>
+you will find out
+for yourself by experimentation
+that the Egg-Sgml parser treats all tags equally--with the exception
+of &lt;script/> and &lt;style/>.</p>
+
+<h2>Getting started.</h2>
+
+<p>/templates_config.xml sets things up that can't be setup
+after a webdoc has been found.
+It only contains the one tag, and output is sent to /dev/null.</p>
+
+<table>
+<tr><td>&lt;main</td><td>!-- api --</td><td></td></tr>
+<tr><td>no-doctype</td><td>!-- < 6</td><td>Should be present. --</td></tr>
+<tr><td>redirect-to-ssl</td><td></td></tr>
+<tr><td>fallback=404</td><td>!-- </td><td>Loaded in case the requested webdoc is
+not found. --</td></tr>
+<tr><td>shipyard-auth=923f1</td><td>!-- >= 5</td><td>Overrides value in shipyard.txt (file
+is still required). --</td></tr>
+<tr><td>extension=.xgml</td><td></td></tr>
+<tr><td>alt-extension=.xml</td><td></td></tr>
+<tr><td>extension-optional</td><td></td></tr>
+<tr><td>shipyard-doc=/shipyard</td><td>!-- </td><td>Loaded when shipyard auth fails. --</td></tr>
+<tr><td>rootdoc=index</td><td></td></tr>
+</table>
+
+<div>>Values are not defaults.&lt;/main></div>
+
+<h2>Shipyard.</h2>
+
+<p>The file shipyard.txt aught to be present on test servers,
+but it is recommended to keep this as an untracked file.
+The main intention is to prevent search engines from including
+your test sites, but if you're concerned about prying eyes
+an update will be necessary so as to keep the auth code inaccessible 
+from the web.</p>
+
+<h2>Updates.</h2>
+
+<p>These are grouped by api, which is therefore put as
+the number on top.</p>
+
+<table>
+<tr><td>5/1</td><td>Optional (downgrade from recommendation)</td></tr>
+<tr><td></td><td>Place shipyard auth code into templates_config.xml 
+(see shipyard-auth in the reference).</td></tr>
+<tr><td></td><td>Remove the contents of shipyard.txt (the empty
+file must remain).</td></tr>
+</table>
+
+<table>
+<tr><td>6/1</td><td>Cleanup</td></tr>
+<tr><td></td><td>Remove no-doctype from templates_config.xml.</td></tr>
+</table>
+
+</div></record><play id=header_footer/>
