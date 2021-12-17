@@ -52,13 +52,15 @@ web server's url mapping.</td></tr>
 <tr><td>&lt;form.cache_dynamic></td><td></td><td>Substitute tag: produces
 a &lt;form> with the same attributes, but provides a query parameter
 which allows caching of blank forms.</td></tr>
-<tr><td>&lt;shipyard></td><td></td><td>Dry-docks.</td></tr>
+<tr><td>&lt;shipyard></td><td></td><td>Branch only visible on test servers.</td></tr>
 <tr><td>&lt;sailing></td><td></td><td>Complementary to &lt;shipyard>.</td></tr>
 <tr><td>&lt;a.site></td><td>href activeclass</td><td>Substitute tag: produces
 &lt;a> with the same attributes, but using activeclass instead
 of class if href points to the enclosing webdoc.</td></tr>
 <tr><td>&lt;redirect/></td><td>location</td><td>PHP rules: this aught to
 be the very first tag.</td></tr>
+<tr><td>&lt;shipyard-log/></td><td></td><td>Replaced with the contents of what has
+been sent to libconfig/brian.</td><td>api-6</td></tr>
 </table>
 
 <p>On the matter of self-closing tags, it must be understood
