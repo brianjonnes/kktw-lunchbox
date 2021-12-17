@@ -6,6 +6,7 @@
 	<a.site class="w3-bar-item w3-button" activeclass="active" href="/egg-sgml"><SMALL>DOCS</SMALL></a.site>
 <!--    <a.site class="w3-bar-item w3-button" activeclass="active" href="/load_shedding"><small>LOAD-SHEDDING-JHB</small></a.site>
     <a.site class="w3-bar-item w3-button" activeclass="active" href="/howto">&lt;howww<sub>2</sub>/></a.site>-->
+	<a class="w3-bar-item w3-button" activeclass="active" href="https://github.com/brianjonnes/kktw-lunchbox"><SMALL>GITHUB</SMALL></a>
 	<div class=extra><play id="nav-extra"/></div>
 </div>
 </div>
