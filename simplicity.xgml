@@ -1,0 +1,52 @@
+<cache_control static/><include path="header_footer.ml"/><record id=meta></record><record id=title>Egg-SGML</record><!--record id="nav-extra">
+	<a class="w3-bar-item w3-button  w3-theme-l5 active" href="/bbc">BBC</a>
+</record--><record id="content">
+<div class="w3-container w3-theme-l5 local">
+
+<p>Egg-SGML stands for simplicity, not security.</p>
+
+<p>If you like to see technology as belonging with the
+military industrial complex, I suggest you <a href='https://stallman.org'>put
+that marmalade back on the shelf</a>.</p>
+
+<p>If you know that HTML has always been simple, 
+you might, like
+us, feel like you were born into the browser wars.</p>
+
+<p>So what can a lib do that simplifies nothing?</p>
+
+<p>I'm tempted to point to the military industrial complex on the
+matter of the browser wars,
+but I joined those who preferred to get wasted with their spare
+time.</p>
+
+<p>For the sake of those who support me I'm
+trying to work up a bit of zeal on the matter of convincing
+you to give this project a try--but I must warn you about
+having a permanent trip.</p>
+
+<p>The outline of this project preceded my losing all interest
+in the works of man, in which condition we're not 
+particularly interested in who owns what.
+
+It may seem a bit of a bold claim to say that GPL embodies
+the Spirit of the Law, but if I don't make it I must be
+faithless. 
+And that sucks eggs.</p>
+
+<p>This is implemented in PHP, but it can easily be ported
+to Python.</p>
+</div>
+
+<div class="source">
+<div class="tweakA"/><div class="w3-container w3-theme-l5">
+<showsource path="simplicity.xgml" highlight="record play include showsource"/></div></div>
+
+<div class="w3-container w3-theme-l5 local">
+
+<p>This page is the authoritative url for the update
+notes for Egg-SGML.</p>
+
+<include path='update-notes.ml'/>
+
+</div></record><play id=header_footer/>

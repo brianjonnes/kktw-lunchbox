@@ -1,1 +1,1 @@
-<main no--redirect-to-ssl sts-expire=333300 rootdoc=egg-sgml extension=.xgml no-doctype shipyard-doc=/shipyard/>
+<main no--redirect-to-ssl sts-expire=333300 rootdoc=simplicity extension=.xgml no-doctype shipyard-doc=/shipyard/>

@@ -33,9 +33,6 @@ Moving to the latest api should generally be safe to
 do, as well as advisable, but it is one thing that must
 not be rushed.</p>
 
-<p>This page is the authoritative url for the update
-notes for Egg-SGML.</p>
-
 <p>The built-in set of tags, as described in the following
 table, are appropriate for static websites.</p>
 
@@ -112,19 +109,6 @@ from the web.</p>
 <p>These are grouped by api, which is therefore put as
 the number on top.</p>
 
-<table>
-<tr><td>5/1</td><td>Optional (downgrade from recommendation)</td></tr>
-<tr><td></td><td>Place shipyard auth code into templates_config.xml 
-(see shipyard-auth in the reference).</td></tr>
-<tr><td></td><td>Remove the contents of shipyard.txt (the empty
-file must remain).</td></tr>
-</table>
-
-<table>
-<tr><td>6/2</td><td>Entry code</td></tr>
-<tr><td></td><td>Custom templates.php requires modules.php (enqueue_modules).</td></tr>
-<tr><td>6/1</td><td>Cleanup</td></tr>
-<tr><td></td><td>Remove no-doctype from templates_config.xml.</td></tr>
-</table>
+<include path='update-notes.ml'/>
 
 </div></record><play id=header_footer/>
