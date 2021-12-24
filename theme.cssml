@@ -21,4 +21,10 @@
 .w3-hover-theme:hover {color:#fff !important; background-color:#213a62 !important}
 .w3-hover-text-theme:hover {color:#213a62 !important}
 .w3-hover-border-theme:hover {border-color:#213a62 !important}
+
+.source { position: relative; padding: 0 0 1px 0; }
+.source .tweakA { width: 50%; border-top: 1px solid #213a62; }
+.source .tweakB { position: absolute; bottom: 0; height: 1px; right: 0; width: 82%; border-bottom: 1px solid #213a62; }
+.source .tweakC { position: absolute; left: 8px; top: 0; height: 50%; width: 1px; border-left: 1px solid #213a62; }
+.source .tweakD { position: absolute; right: 8px; bottom: 0; height: 82%; width: 1px; border-right: 1px solid #213a62; }
 </style>

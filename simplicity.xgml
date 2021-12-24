@@ -40,7 +40,7 @@ to Python.</p>
 
 <div class="source">
 <div class="tweakA"/><div class="w3-container w3-theme-l5">
-<showsource path="simplicity.xgml" highlight="record play include showsource"/></div></div>
+<showsource path="simplicity.xgml" highlight="record play include showsource"/></div><div class="tweakB"/></div>
 
 <div class="w3-container w3-theme-l5 local">
 
