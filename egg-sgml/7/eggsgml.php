@@ -103,7 +103,7 @@ class subrootdomegg {
 			$env->diplomat('tgc')->tgc->start($env);
 		}
 		$env->enqueue( $this, 1 );
-		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+		enqueue_subtree( $env, $this->dn );
 		return;
 		for( $w = $this->dn->childNodes->length ; $w > 0 ; $w -= 1 ) {
 			$c = $this->dn->childNodes->item($w-1);
@@ -144,11 +144,9 @@ class enqueue_result {
 	public $egg;
 };
 
-function enqueue_subtree( $env, $thisdn, $thistgcnode, $thiswriternode ) {
+function enqueue_subtree( $env, $thisdn ) {
 	$w = $c = $a = $h = null;
 	$r = new enqueue_result;
-	$r->tgcnode = $thistgcnode;
-	$r->writernode = $thiswriternode;
 	for( $w = $thisdn->childNodes->length ; $w > 0 ; $w -= 1 ) {
 		$c = $thisdn->childNodes->item($w-1);
 		do {
@@ -159,15 +157,13 @@ function enqueue_subtree( $env, $thisdn, $thistgcnode, $thiswriternode ) {
 					$env->enqueue( $r->egg, 0 );
 					break;
 				case 2:
-					enqueue_subtree( $env, $c, $thistgcnode, $thiswriternode );
+					enqueue_subtree( $env, $c );
 					$env->enqueue( $r->egg, 0 );
 					break;
 				}
 				break; }
 			$a = new domegg;
-			$a->tgcnode = $thistgcnode;
 			$a->dn = $c;
-			$a->writernode = $thiswriternode;
 			$env->enqueue( $a, 0 );
 		} while(0);
 	}
@@ -275,7 +271,7 @@ class domegg {
 	_2:
 		$env->enqueue( $this, 1 );
 	_2b:
-		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+		enqueue_subtree( $env, $this->dn );
 		return;
 		for( $w = $this->dn->childNodes->length ; $w > 0 ; $w -= 1 ) {
 			$c = $this->dn->childNodes->item($w-1);

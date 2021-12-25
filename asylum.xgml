@@ -1,6 +1,6 @@
-<cache_control static/><include path="header_footer.ml"/><record id=meta></record><record id=title>Egg-SGML</record><record id="nav-extra">
+<cache_control static/><include path="header_footer.ml"/><record id=meta></record><record id=title>Egg-SGML</record><!--record id="nav-extra">
 	<a class="w3-bar-item w3-button  w3-theme-l5 active" href="/asylum">Asylum</a>
-</record><record id="content">
+</record--><record id="content">
 <module egg path="asylum.php"><div class="w3-container w3-theme-l5 local">
 
 <p>An egg-box gives us an example of a matrix which is useless
@@ -16,8 +16,7 @@ cells.</p>
 <p>Sitting in my cell, I imagine alligators and crocodiles and
 wonder which one is the bigger.
 Designers of app user interfaces need to cater for the case that
-no-one is in the asylum;
-
+no-one is in the asylum; 
 but not those who like to talk to themselves.
 Those who like to talk to themselves revisit what they've done as
 a matter of necessity, strictly as a matter of necessity.
@@ -52,5 +51,7 @@ conveyed by the cell referee that sanity has been restored.</p>
 </table>
 </asylum>
 </p>
+
+<p>Note: module source is 7/asylum,php.</p>
 
 </div></module></record><play id=header_footer/>
