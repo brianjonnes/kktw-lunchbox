@@ -1,0 +1,56 @@
+<cache_control static/><include path="header_footer.ml"/><record id=meta></record><record id=title>Egg-SGML</record><record id="nav-extra">
+	<a class="w3-bar-item w3-button  w3-theme-l5 active" href="/asylum">Asylum</a>
+</record><record id="content">
+<module egg path="asylum.php"><div class="w3-container w3-theme-l5 local">
+
+<p>An egg-box gives us an example of a matrix which is useless
+as a matrix; and therefore a perfect description of
+what being practical with a scripting language is about.
+
+Some might therefore understand why we find ourselves in a
+straight-jacket when we're being told to call an html div a
+row, 
+though the code must yet do the work of grouping the
+cells.</p>
+
+<p>Sitting in my cell, I imagine alligators and crocodiles and
+wonder which one is the bigger.
+Designers of app user interfaces need to cater for the case that
+no-one is in the asylum;
+
+but not those who like to talk to themselves.
+Those who like to talk to themselves revisit what they've done as
+a matter of necessity, strictly as a matter of necessity.
+Building an asylum is not a matter of necessity, but it
+makes the neighbours jealous.
+Documenting the building of it, once started, cannot exclude instructions
+as to how it aught to be filled.</p>
+
+<p>A patient is preloaded before construction begins.
+This allows the place to remain a beautiful park that is only gone
+to by the impoverished and those who don't leave their cars, while
+sanity prevails.
+The keeper of the wards may continue to munch on its fast food
+while a cell is being filled. But when one reaches capacity we're
+required to make the kind of decision that is overly prescriptive
+if given to sane people:
+
+must 
+the cell packer check for more patients, or must that be
+left to the higher authority?</p>
+
+<p>We therefore look at the other case--which is what makes programming
+so damn easy. If we run out of patients with a cell not yet full
+there is no decision to be made: the unfortunate news must be
+conveyed by the cell referee that sanity has been restored.</p>
+
+<p>
+<asylum>
+<table>
+<ward><tr><cell patients=5><td><page_name/></td></cell>
+</tr></ward>
+</table>
+</asylum>
+</p>
+
+</div></module></record><play id=header_footer/>

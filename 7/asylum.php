@@ -153,20 +153,82 @@ class tgc_test_c__a {
 	}
 };
 
-class tgc_test_c__page {
+class tgctestc_dictionary {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+	
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		$env->write( sr_amp_lt( $env->diag_diplomats() ) );
+	}
+};
+
+class tgctestc_pagename {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+	
+	function __construct( $a ) {
+		$this->a = $a;
+	}
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		$env->write( sr_amp_lt( $this->a ) );
+	}
+};
+class tgctestc_cachecontrol {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+	
+	function __construct( $a ) {
+		$this->a = $a;
+	}
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		$d = load_eggsgml_file( $_SERVER['DOCUMENT_ROOT'] . '/' . $this->a );
+		$d = eggsgml_descendent( $d, 'cache_control' );
+		if( $d ) {
+			if( attribute_exists( $d, 'static' ) ) {
+				$env->write('static');
+			} else if( attribute_exists( $d, 'dynamic' ) ) {
+				$env->write('dynamic');
+			} else if( attribute_exists( $d, 'querystring' ) ) {
+				$env->write('querystring');
+			}
+		}
+	}
+};
+
+class tgc_test_c__cell {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+
+	public $tgcnode;
+	public $tgc, $dn;
+
+	public $q;
+
+
 	public $NF, $path, $env;
-	public $n, $a;
+	public $n, $a, $sanity;
 	function __construct($path,$env,$clipname) {
 		$this->path = $path;
 		$this->env = $env;
 		$this->n = opendir( $_SERVER['DOCUMENT_ROOT'] );
 		$this->c = new tgc_test_c__a($path,$env,$clipname);
+		$this->sanity = 0;
 	}
 	function read() {
 		while(1) {
 			$this->a = readdir($this->n);
 			if( $this->a === false ) {
 				return false; }
+			break;
 			if( strtoupper( substr($this->a,strlen($this->a)-strlen($this->env->file_ext)) ) == strtoupper( $this->env->file_ext ) ) {
 				break; }
 		}
@@ -181,11 +243,27 @@ class tgc_test_c__page {
 	}
 	function consume_text( $q, $x ) {
 		$q->write(str_replace("<","&lt;", str_replace( "&", "&amp;", $x ) ) ); }
-	function consume( $q, $end, $w ) {
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		if( $tsr ) {
+			if( ! $this->read() ) { $this->sanity = 1; return; }
+			if( $this->b == $this->patients ) return;
+			$this->b += 1;
+		} else {
+			$this->b = 1;
+		}
+		$env->enqueue_idents( $this, [ '*cache_control_value', '*page_name', '*dictionary' ]  );
+		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+	}
+	function this_and_that( $r, $env, $w ) {
 		$d = null;
 		switch($w->nodeName) {
+		case 'dictionary':
+			$r->egg = new tgctestc_dictionary;
+			return 2;
 		case 'clip_value':
-			if( $end ) return 1;
 			$d = load_eggsgml_file( $_SERVER['DOCUMENT_ROOT'] . '/' . $this->a );
 			$this->NF = newframe($this->c, $q, $d);
 			return 3;
@@ -195,35 +273,82 @@ class tgc_test_c__page {
 			$this->NF = newframe( new tgc_test_c__image($this->path,$this->env,$w), $q, $d );
 			return 3;
 		case 'cache_control_value':
-			if( $end ) return 1;
+			$r->egg = new tgctestc_cachecontrol($this->a);
+			return 2;
 			$d = load_eggsgml_file( $_SERVER['DOCUMENT_ROOT'] . '/' . $this->a );
 			$d = eggsgml_descendent( $d, 'cache_control' );
 			if( $d ) {
 				if( attribute_exists( $d, 'static' ) ) {
-					$q->write('static');
+					$env->write('static');
 				} else if( attribute_exists( $d, 'dynamic' ) ) {
-					$q->write('dynamic');
+					$env->write('dynamic');
 				} else if( attribute_exists( $d, 'querystring' ) ) {
-					$q->write('querystring');
+					$env->write('querystring');
 				}
 			}
 			return 2;
 		case 'page_name':
-			if( $end ) return 1;
-			$q->write( sr_amp_lt( $this->a ) );
+			$r->egg = new tgctestc_pagename($this->a);
+			return 2;
+			$env->write( sr_amp_lt( $this->a ) );
 			return 2;
 		}
 		return 0;
 	}
 };
 
+class tgctestc_ward {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+
+	public $tgcnode;
+	public $tgc, $dn;
+
+	public $q;
+
+	public $m;
+	function __construct($path,$env,$clipname) {
+		$this->m = new tgc_test_c__cell($path,$env,$clipname);
+	}
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		if( $tsr ) {
+			if( $this->m->sanity ) return;
+		}
+		$env->enqueue_idents( $this, [ '*cell' ] );
+		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+	}
+	function this_and_that( $r, $env, $w ) {
+		switch( $w->nodeName ) {
+		case 'cell':
+			$this->m->dn = $w;
+			$this->m->writernode = $r->writernode;
+			$this->m->tgcnode = $r->tgcnode;
+			$this->m->patients = $w->getAttribute('patients');
+			$r->egg = $this->m;
+			return 1; //3;
+		}
+		return 0;
+	}
+};
+
 class tgc_test_c__pages {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+
+	public $tgcnode;
+	public $tgc, $dn;
+
+	public $q;
+
 	public $NF, $path, $env;
 	public $m;
 	function __construct($path,$env,$clipname) {
 		$this->path = $path;
 		$this->env = $env;
-		$this->m = new tgc_test_c__page($this->path,$this->env,$clipname);
+		$this->m = new tgctestc_ward($this->path,$this->env,$clipname);
 	}
 	function open() {
 		return $this->m->read();
@@ -242,14 +367,29 @@ class tgc_test_c__pages {
 		return 0; }
 	function consume_text( $q, $x ) {
 		$q->write(str_replace("<","&lt;", str_replace( "&", "&amp;", $x ) ) ); }
-	function consume( $q, $end, $w ) {
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		if( $tsr ) return;
+		if( ! $this->m->m->read() ) {
+			$this->NF = newframe( new tgc_test_c__empty, $q, $w );
+			return;
+		}
+		$env->enqueue_idents( $this, [ '*ward', '*empty' ] );
+		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+	}
+	function this_and_that( $r, $env, $w ) {
 		switch( $w->nodeName ) {
 		case 'empty':
-			return 1;
-		case 'item':
-			if( $end ) return 1;
-			$this->NF = newframe( $this->m, $q, $w );
-			return 3;
+			return 0;
+		case 'ward':
+			$this->NF = $this->m; //newframe( $this->m, $q, $w );
+			$this->m->dn = $w;
+			$this->m->writernode = $r->writernode;
+			$this->m->tgcnode = $r->tgcnode;
+			$r->egg = $this->m;
+			return 1; //3;
 		}
 		return 0;
 	}
@@ -277,16 +417,62 @@ class mtgc_test_c {
 		case 'pages':
 			if( $end ) return 1;
 			$c = new tgc_test_c__pages($this->path,$this->env,$this->clipname);
-			if( $c->open() ) {
+			//if( $c->open() ) {
+				$this->NF = $c;
+				$c->dn = $w;
+				$this->NF->writernode = $q->stack->writernode;
+				$this->NF->tgcnode = $q->stack->tgcnode;
+				return 4;
 				$this->NF = newframe( $c, $q, $w );
-			} else {
+			//} else {
 				$this->NF = newframe( new tgc_test_c__empty, $q, $w );
-			}
+			//}
 			return 3;
 		}
 		return 0;
 	}
 }
 
-return new mtgc_test_c;
+//class tgctestc_pages {
+//	function this_and_that( $env, $type, $m ) {
+
+
+class test_c_egg {
+	public $tsq, $tsr, $tsw;
+	public $writernode;
+
+	public $tgcnode;
+	public $tgc, $dn;
+
+	public $q;
+
+	public $path;
+	function initialize($path,$w) {
+		$this->path = $path;
+		$this->dn = $w;
+	}
+	function write($a) {
+		if( $this->writernode ) $this->writernode->q->write($a); 
+	}
+	function tap( $env, $tsr ) {
+		if( $tsr ) return;
+		$env->enqueue_idents( $this, [ '*asylum' ] );
+		enqueue_subtree( $env, $this->dn, $this->tgcnode, $this->writernode );
+	}
+	function this_and_that( $r, $env, $w ) {
+		$c = null;
+		switch( $w->nodeName ) {
+		case 'asylum':
+			$c = new tgc_test_c__pages($this->path,$env,'clipname');
+			$c->dn = $w;
+			$c->writernode = $r->writernode;
+			$c->tgcnode = $r->tgcnode;
+			$r->egg = $c;
+			return 1;
+		}
+		return 0;
+	}
+};
+
+return new test_c_egg;
 ?>
